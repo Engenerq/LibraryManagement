@@ -3,7 +3,10 @@ from uuid import UUID
 
 
 class BookDB(TypedDict):
-    id: UUID
+    """
+    Типизация книги
+    """
+    id_book: UUID
     title: str
     author: str
     year: int
@@ -11,4 +14,8 @@ class BookDB(TypedDict):
 
 
 class LibDB(TypedDict):
-    books: list[BookDB]
+    """
+    Типизация библиотеки
+    """
+    index: dict[str, dict[str, list[UUID]]]
+    books: dict[UUID, BookDB]

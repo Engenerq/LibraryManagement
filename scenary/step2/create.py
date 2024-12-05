@@ -1,5 +1,5 @@
-from db import db
-from model.book import Book
+from db import WorkerJson
+from model.book import BookCreate
 from scenary.base import BaseScenary
 
 
@@ -10,26 +10,36 @@ class StepCreate(BaseScenary):
     """
 
     def make_step(self):
-        Book(
+        book = BookCreate(
             title=self._set_title(),
             author=self._set_author(),
             year=self._set_year(),
-        ).dump_file(db)
+        )
+        WorkerJson().dump_file(book)
 
     def _set_title(self):
+        """
+        Установка параметра title
+        """
         while True:
             title = input("Введите Title: ")
-            if input(f"Будет установлен {title=}[y]") == "y":
+            if input(f"Будет установлен {title}[y] -> ") == "y":
                 return title
 
     def _set_author(self):
+        """
+        Установка параметра author
+        """
         while True:
             author = input("Введите Author: ")
-            if input(f"Будет установлен {author=}[y]") == "y":
+            if input(f"Будет установлен {author} [y] -> ") == "y":
                 return author
 
     def _set_year(self):
+        """
+        Установка параметра year
+        """
         while True:
             year = int(input("Введите Year: "))
-            if input(f"Будет установлен {year=}[y]") == "y":
+            if input(f"Будет установлен {year}[y] -> ") == "y":
                 return year
